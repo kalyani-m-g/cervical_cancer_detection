@@ -160,7 +160,25 @@ binary_features = [
     'STDs:HPV'
 ]
 
+integer_features = [
+    'Age',
+    'Number of sexual partners',
+    'First sexual intercourse',
+    'Num of pregnancies',
+    'STDs (number)',
+    'STDs: Number of diagnosis'
+]
+
 st.subheader("📋 Patient Information")
+
+integer_features = [
+    'Age',
+    'Number of sexual partners',
+    'First sexual intercourse',
+    'Num of pregnancies',
+    'STDs (number)',
+    'STDs: Number of diagnosis'
+]
 
 inputs = {}
 
@@ -183,14 +201,26 @@ for i, feature in enumerate(features):
 
         else:
 
-            inputs[feature] = st.number_input(
-                feature,
-                min_value=0.0,
-                value=0.0,
-                step=0.1,
-                format="%.2f",
-                key=feature
-            )
+            if feature in integer_features:
+
+                inputs[feature] = st.number_input(
+                    feature,
+                    min_value=0,
+                    value=0,
+                    step=1,
+                    key=feature
+                )
+
+            else:
+
+                inputs[feature] = st.number_input(
+                    feature,
+                    min_value=0.0,
+                    value=0.0,
+                    step=0.1,
+                    format="%.1f",
+                    key=feature
+                )
 
 # Prediction
 if st.button("🔍 Predict Risk"):
@@ -244,7 +274,6 @@ This result is generated using a machine learning model trained on historical cl
 It should not be used as a substitute for professional medical diagnosis or treatment.
 """)
 
-# Footer
 st.markdown("---")
 
 st.caption(
