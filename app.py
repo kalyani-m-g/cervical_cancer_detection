@@ -140,13 +140,9 @@ binary_features = [
     'Hormonal Contraceptives',
     'IUD',
     'STDs',
-    'Dx:Cancer',
-    'Dx:CIN',
-    'Dx:HPV',
-    'Dx',
-    'Hinselmann',
-    'Schiller',
-    'Citology',
+
+    'STDs:condylomatosis',
+
     'STDs:cervical condylomatosis',
     'STDs:vaginal condylomatosis',
     'STDs:vulvo-perineal condylomatosis',
@@ -157,7 +153,15 @@ binary_features = [
     'STDs:AIDS',
     'STDs:HIV',
     'STDs:Hepatitis B',
-    'STDs:HPV'
+    'STDs:HPV',
+
+    'Dx:Cancer',
+    'Dx:CIN',
+    'Dx:HPV',
+    'Dx',
+    'Hinselmann',
+    'Schiller',
+    'Citology'
 ]
 
 integer_features = [
