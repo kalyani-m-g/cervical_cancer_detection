@@ -68,9 +68,7 @@ This intelligent screening system uses machine learning to estimate cervical can
 This tool is intended for educational and research purposes only.
 """)
 
-    st.markdown("---")
-    st.write("👩‍💻 Developed by")
-    st.write("**Kalyani M G**")
+
 
 # Main Header
 st.markdown("""
