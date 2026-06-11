@@ -47,7 +47,7 @@ with st.sidebar:
     st.title("About This Project")
 
     st.markdown("""
-    ### 🩺 Cervical Cancer Risk Prediction
+    ###  Cervical Cancer Risk Prediction
 
     This application uses a Machine Learning model
     trained on clinical and patient history data
