@@ -188,7 +188,7 @@ for i, feature in enumerate(features):
                 min_value=0.0,
                 value=0.0,
                 step=0.1,
-                format="%.1f",
+                format="%.2f",
                 key=feature
             )
 
