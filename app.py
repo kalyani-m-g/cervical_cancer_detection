@@ -192,10 +192,20 @@ if st.button("Predict Risk"):
     st.markdown("---")
     st.subheader("📊 Prediction Results")
 
-    st.metric(
-        "Risk Probability",
-        f"{probability * 100:.2f}%"
-    )
+   st.markdown(f"""
+<div style="
+background:#0E2A47;
+padding:25px;
+border-radius:15px;
+border-left:6px solid #1976D2;
+margin-bottom:20px;
+">
+<h4 style="color:white;margin:0;">Risk Probability</h4>
+<h1 style="color:#4FC3F7;margin:0;">
+{probability*100:.2f}%
+</h1>
+</div>
+""", unsafe_allow_html=True)
 
     st.progress(float(probability))
 
