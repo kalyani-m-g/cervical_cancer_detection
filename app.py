@@ -47,11 +47,11 @@ This intelligent screening system uses machine learning to estimate cervical can
 """)
 
     st.markdown("""
-### 🔬 Model Details
-- Algorithm: XGBoost
-- Features: 33
-- Preprocessing: StandardScaler
-- Output: Risk Probability
+### 📊 System Overview
+- Clinical Risk Assessment
+- 33 Health Indicators
+- Patient History Analysis
+- Risk Probability Estimation
 
 ### 📋 Parameters Analyzed
 - Personal Information
@@ -79,7 +79,7 @@ st.markdown("""
 </h1>
 
 <p style='text-align:center;font-size:18px;color:gray;'>
-Machine Learning Based Healthcare Risk Assessment
+Clinical Risk Assessment Support System
 </p>
 """, unsafe_allow_html=True)
 
@@ -173,6 +173,61 @@ integer_features = [
     'STDs: Number of diagnosis'
 ]
 
+display_names = {
+    'Age': 'Age (Years)',
+    'Number of sexual partners': 'Number of Sexual Partners',
+    'First sexual intercourse': 'Age at First Sexual Intercourse',
+    'Num of pregnancies': 'Number of Pregnancies',
+
+    'Smokes': 'Smoking History',
+    'Smokes (years)': 'Years of Smoking',
+    'Smokes (packs/year)': 'Smoking Exposure (Pack-Years)',
+
+    'Hormonal Contraceptives': 'Uses Hormonal Contraceptives',
+    'Hormonal Contraceptives (years)': 'Years of Contraceptive Use',
+
+    'IUD': 'Uses Intrauterine Device (IUD)',
+    'IUD (years)': 'Years of IUD Use',
+
+    'STDs': 'History of STDs',
+    'STDs (number)': 'Number of STD Diagnoses',
+
+    'STDs:condylomatosis': 'Genital Warts',
+    'STDs:cervical condylomatosis': 'Cervical Genital Warts',
+    'STDs:vaginal condylomatosis': 'Vaginal Genital Warts',
+    'STDs:vulvo-perineal condylomatosis': 'Vulva/Perineal Genital Warts',
+
+    'STDs:syphilis': 'History of Syphilis',
+    'STDs:pelvic inflammatory disease': 'Pelvic Inflammatory Disease',
+    'STDs:genital herpes': 'Genital Herpes',
+    'STDs:molluscum contagiosum': 'Molluscum Contagiosum',
+
+    'STDs:AIDS': 'AIDS Diagnosis',
+    'STDs:HIV': 'HIV Infection',
+    'STDs:Hepatitis B': 'Hepatitis B Infection',
+    'STDs:HPV': 'HPV Infection',
+
+    'STDs: Number of diagnosis': 'Total STD Diagnoses',
+
+    'Dx:Cancer': 'Previous Cervical Cancer Diagnosis',
+    'Dx:CIN': 'Previous Cervical Lesion (CIN)',
+    'Dx:HPV': 'Previous HPV Diagnosis',
+    'Dx': 'Any Previous Cervical Diagnosis',
+
+    'Hinselmann': 'Positive Hinselmann Test',
+    'Schiller': 'Positive Schiller Test',
+    'Citology': 'Abnormal Pap Smear Result'
+}
+help_text = {
+    'Smokes (packs/year)': 'Measures cumulative smoking exposure.',
+    'Dx': 'Any previous diagnosis related to cervical disease.',
+    'Dx:CIN': 'Precancerous changes in cervical cells.',
+    'Citology': 'Result of Pap smear examination.',
+    'Hinselmann': 'Cervical examination test result.',
+    'Schiller': 'Iodine-based cervical screening test result.',
+    'STDs:HPV': 'Human Papillomavirus infection history.'
+}
+
 st.subheader("📋 Patient Information")
 
 integer_features = [
@@ -190,14 +245,18 @@ col1, col2 = st.columns(2)
 
 for i, feature in enumerate(features):
 
+    label = display_names.get(feature, feature)
+    tooltip = help_text.get(feature, None)
+
     with col1 if i % 2 == 0 else col2:
 
         if feature in binary_features:
 
             inputs[feature] = (
                 1 if st.selectbox(
-                    feature,
+                    label,
                     ["No", "Yes"],
+                    help=tooltip,
                     key=feature
                 ) == "Yes"
                 else 0
@@ -207,25 +266,35 @@ for i, feature in enumerate(features):
 
             if feature in integer_features:
 
+                default_value = 0
+
+                if feature == "Age":
+                    default_value = 25
+                elif feature == "First sexual intercourse":
+                    default_value = 18
+                elif feature == "Number of sexual partners":
+                    default_value = 1
+
                 inputs[feature] = st.number_input(
-                    feature,
+                    label,
                     min_value=0,
-                    value=0,
+                    value=default_value,
                     step=1,
+                    help=tooltip,
                     key=feature
                 )
 
             else:
 
                 inputs[feature] = st.number_input(
-                    feature,
+                    label,
                     min_value=0.0,
                     value=0.0,
                     step=0.1,
                     format="%.1f",
+                    help=tooltip,
                     key=feature
                 )
-
 # Prediction
 if st.button("🔍 Predict Risk"):
 
@@ -277,6 +346,33 @@ This result is generated using a machine learning model trained on historical cl
 
 It should not be used as a substitute for professional medical diagnosis or treatment.
 """)
+
+
+st.markdown("---")
+
+with st.expander("📖 View Project Information"):
+
+    st.write("""
+    **Project:** Cervical Cancer Risk Prediction System
+
+    This application uses machine learning to estimate cervical cancer risk
+    based on patient history and clinical indicators.
+
+    **Technologies**
+    - Python
+    - Streamlit
+    - Pandas
+    - Scikit-Learn
+    - XGBoost
+
+    **Features**
+    - 33 Clinical Parameters
+    - Risk Probability Estimation
+    - Interactive Healthcare Dashboard
+
+    **Developer**
+    Kalyani M G
+    """)
 
 st.markdown("---")
 
