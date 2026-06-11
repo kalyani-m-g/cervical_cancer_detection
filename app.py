@@ -38,17 +38,44 @@ div[data-testid="stMetric"] {
 
 # Sidebar
 with st.sidebar:
-    st.header("📋 About")
 
-    st.info("""
-    AI-powered cervical cancer risk assessment system.
+    st.image(
+        "https://img.icons8.com/color/96/stethoscope.png",
+        width=80
+    )
 
-    Features Used: 33
-    Model: Machine Learning
+    st.title("About This Project")
+
+    st.markdown("""
+    ### 🩺 Cervical Cancer Risk Prediction
+
+    This application uses a Machine Learning model
+    trained on clinical and patient history data
+    to estimate the likelihood of cervical cancer risk.
+
+    #### 🔬 Model Details
+    - Algorithm: XGBoost Classifier
+    - Features Used: 33
+    - Data Preprocessing: StandardScaler
+    - Output: Risk Probability Score
+
+    #### 📋 Parameters Analyzed
+    - Personal Information
+    - Smoking History
+    - Contraceptive Usage
+    - IUD Usage
+    - STD History
+    - Diagnostic Test Results
+
+    #### 🎯 Purpose
+    To demonstrate how machine learning can assist
+    healthcare professionals in early risk assessment.
+
+    ---
+    👩‍💻 Developed by **Kalyani M G**
+    
+    
     """)
-
-    st.markdown("---")
-    st.write("Developed by Kalyani")
 
 # Header
 st.markdown("""
